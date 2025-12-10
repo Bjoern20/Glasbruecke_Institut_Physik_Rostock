@@ -9,7 +9,7 @@ import pandas as pd
 import os
 import locale
 locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
-import plot_functions_Weihnachts_Koll as fun
+import plot_functions_Weihnachtskoll as fun
 
 file_path = 'Glasbruecke_data_Weihnachtskoll.xlsx'
 df = pd.read_excel(file_path)
