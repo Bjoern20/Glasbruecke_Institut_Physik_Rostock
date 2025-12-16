@@ -1,6 +1,6 @@
 # Glasbruecke_Institut_Physik_Rostock
 ### Beschreibung
-Im "Höheren Bildungsweg" (der Glasbrücke, die das Hörsaagebäude und Forschungsgebäude) vom Institut für Physik der Universität Rostock verbindet gibt es einen ca. 20-30 mm großen Spalt im Boden. Dieser wuchs seit der Gründung des Gebäudes im Jahre 2025. Es wurden Daten seit August 2024 händisch aufgezeichnet darunter die Spaltbreite mit einem Messschieber und die Temperatur mit einer Wärmebildkamera (FLIR One Gen III). Die aktuellen Daten legen nahe, dass jetzt (Stand Dez. 2025) ein oszillierender Effekt über das Jahr überwiegend durch thermische Ausdehung die Hauptbewegung beschreibt.
+Im "Höheren Bildungsweg" (der Glasbrücke, die das Hörsaagebäude und Forschungsgebäude) vom Institut für Physik der Universität Rostock verbindet gibt es einen ca. 20-30 mm großen Spalt im Boden. Dieser wuchs seit dem Bezug des Gebäudes im Jahre 2005. Es wurden Daten seit August 2024 händisch aufgezeichnet darunter die Spaltbreite mit einem Messschieber und die Temperatur mit einer Wärmebildkamera (FLIR One Gen III). Die Daten legen nahe, dass nach der Spaltentstehung, jetzt (Stand Dez. 2025) ein oszillierender Effekt über das Jahr überwiegend durch thermische Ausdehung die Hauptbewegung dominiert.
 
 #### Weihnachtskolloguium 2025
 Im Rahmen des Weihnachtskolloguium 2025 am Institut für Physik wurden die damaligen Ergebnisse und Erkenntise vorgestellt der Foliensatz ist im Repro enthalten
