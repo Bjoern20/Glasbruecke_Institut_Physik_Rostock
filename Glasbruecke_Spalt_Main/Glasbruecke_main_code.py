@@ -23,7 +23,7 @@ delta_D = df['dD_i/mm'].to_numpy()
 
 
 year_start = '2024' #only text
-year_end = '2025' #only text
+year_end = '2026' #only text
 time_style = 'time' #time (#days) or Date (date)
 
 if time_style == 'days':
