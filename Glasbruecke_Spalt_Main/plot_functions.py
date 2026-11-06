@@ -81,4 +81,25 @@ def plot_temperature_movement(folder, D1, T1, D2, T2, delta_D, delta_T, year_sta
     plt.legend(fontsize=FS)
     plt.savefig(f'{folder}/Temperature_movment.png', dpi=150)
     plt.show()
+    return 
+
+def plot_temperature_movement_flip(folder, D1, T1, D2, T2, delta_D, delta_T, year_start, year_end):
+    ext_D = 0.05 #axis scaling in x-dir
+    ext_T = 0.10 #axis scaling in y-dir
+
+    FS = 10
+    fig, ax = plt.subplots(figsize=(10, 6)) #(10,6)
+    gradient = np.linspace(1, 0, 256).reshape(1, -1)
+    ax.imshow(gradient, extent=[(1-ext_T)*min(min(T1-delta_T), min(T2-delta_T)), (1+ext_T)*max(max(T1+delta_T), max(T2+delta_T)), (1-ext_D)*min(min(D1-delta_D), min(D2-delta_D)), (1+ext_D)*max(max(D1+delta_D), max(D2+delta_D))], aspect='auto', cmap='coolwarm_r', alpha=0.7)
+    plt.errorbar(T1, D1, xerr=delta_T, yerr=delta_D, marker='o', linestyle='', linewidth=1.5, color='navy', markersize=5, markeredgewidth=1.5, capsize=5, label='Measuring point left')
+    plt.errorbar(T2, D2, xerr=delta_T, yerr=delta_D, marker='v', linestyle='', linewidth=1.5, color='firebrick', markersize=5, markeredgewidth=1.5, capsize=5, label='Measuring point right')
+    plt.tick_params(axis='x', which='both', labelsize=FS)
+    plt.tick_params(axis='y', which='both', labelsize=FS)
+    plt.xlabel('Temperature [°C]', fontsize=FS)
+    plt.ylabel('Gap distance [mm]', fontsize=FS)
+    plt.title('Temperature dependency for the translatoric movement of the glass bridge \n Institute for Physics, University of Rostock', fontsize=1.3*FS)
+    plt.text(0.11, 0.02, f'Björn Lindqvist ({year_start} - {year_end})', fontsize=0.8*FS, ha='center', va='bottom', transform=plt.gca().transAxes)
+    plt.legend(fontsize=FS)
+    plt.savefig(f'{folder}/Temperature_movment.png', dpi=150)
+    plt.show()
     return None

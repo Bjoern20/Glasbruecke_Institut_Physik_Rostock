@@ -31,18 +31,56 @@ def temperatur_correction(file_path, plot_tick=False):
     return T1_new_fitted, T2_new_fitted
 
 
-def data_modifier(file_path_raw):
+#this function do nothing currently and just return input path again
+def temperature_modifier(file_path_raw):
     df = pd.read_excel(file_path_raw)
     # creat copy of raw data excel 
-    
-    
-    T1_new, T2_new = temperatur_correction(file_path_raw, plot_tick=False)
-        
-
-    
-
+    # T1_new, T2_new = temperatur_correction(file_path_raw, plot_tick=False) #this function throw errors as well 
     return file_path_raw
 
+
+#%% Correct new measurementpoints after closing the gap in summer 2026
+def linear_fit(x, y):
+    mask = np.isfinite(x) & np.isfinite(y)
+    a, b = np.polyfit(x[mask], y[mask], 1)
+    return a, b
+
+def debug_plot_linear_fits(T1, T2, D1, D2, D3, D4, a1, a2, a3, a4, b1, b2, b3, b4, main_shift, pos_shift):
+    import matplotlib.pyplot as plt
+    T_vec = np.linspace(9, 37, 1000)
+    plt.figure()
+    plt.plot(T1, D1, 's')
+    plt.plot(T2, D2, 'o')
+    plt.plot(T1, D3-main_shift, '*')
+    plt.plot(T2, D4-main_shift-pos_shift, 'x')
+    plt.plot(T_vec, a1*T_vec+b1)
+    plt.plot(T_vec, a2*T_vec+b2)
+    plt.plot(T_vec, a3*T_vec+b3-main_shift)
+    plt.plot(T_vec, a4*T_vec+b4-main_shift-pos_shift)
+    plt.show()
+    return None 
+
+def new_measurmentpoint_modifier(T1, T2, D1, D2, D3, D4, debug_plot_tick=False):
+    
+    T_reference = np.nanmean([T1, T2])
+    
+    a1, b1 = linear_fit(T1, D1)
+    a2, b2 = linear_fit(T2, D2)
+    a3, b3 = linear_fit(T1, D3)
+    a4, b4 = linear_fit(T2, D4)
+    
+    D1_ref = a1*T_reference + b1
+    D3_ref = a3*T_reference + b3
+
+    main_shift = D3_ref - D1_ref #schiebt neue Daten ins Optimum der Temp-Gab-Verteilung
+    pos_shift = np.nanmean(D4 - D3) + np.nanmean(D1 - D2) #korrigiert den zusammenhang der beiden Messpunkte, da es keine Scherung gibt kann man mittelwerte Bilden und diese einfach subtrahieren (sowohl für alte als auch neue Daten)
+    D_new1 = np.where(~np.isnan(D1), D1, D3 - main_shift) #mm
+    D_new2 = np.where(~np.isnan(D2), D2, D4 - main_shift - pos_shift) #mm
+    
+    if debug_plot_tick: 
+        debug_plot_linear_fits(T1, T2, D1, D2, D3, D4, a1, a2, a3, a4, b1, b2, b3, b4, main_shift, pos_shift)
+    
+    return D_new1, D_new2
 
 
 
