@@ -80,7 +80,8 @@ def new_measurmentpoint_modifier(T1, T2, D1, D2, D3, D4, debug_plot_tick=False):
     if debug_plot_tick: 
         debug_plot_linear_fits(T1, T2, D1, D2, D3, D4, a1, a2, a3, a4, b1, b2, b3, b4, main_shift, pos_shift)
     
-    return D_new1, D_new2
+    return D3 - main_shift, D4 - main_shift - pos_shift
+    # return D_new1, D_new2
 
 
 

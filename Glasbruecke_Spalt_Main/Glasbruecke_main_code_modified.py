@@ -23,8 +23,7 @@ D1 = df['D1/mm'].to_numpy()
 D2 = df['D2/mm'].to_numpy()
 D3 = df["D3/cm"].to_numpy()*10 #mm
 D4 = df["D4/cm"].to_numpy()*10 #mm
-
-D1, D2 = mod_fun.new_measurmentpoint_modifier(T1, T2, D1, D2, D3, D4)
+D3, D4 = mod_fun.new_measurmentpoint_modifier(T1, T2, D1, D2, D3, D4)
 
 delta_T = df['dT_i/K'].to_numpy()
 delta_D = df['dD_i/mm'].to_numpy()
@@ -32,7 +31,7 @@ delta_D = df['dD_i/mm'].to_numpy()
 
 year_start = '2024' #only text
 year_end = '2026' #only text
-time_style = 'time' #time (days) or Date (date)
+time_style = 'days' #time (days) or Date (date)
 
 if time_style == 'days':
     time = Days
@@ -49,15 +48,15 @@ os.makedirs(folder, exist_ok=True)
 
 #%% movment over the year
 print('INFO: plot time-gap')
-fun.plot_time_gap(folder, time, D1, D2, delta_D, xlabel, year_start=year_start, year_end=year_end, time_style=time_style)
+fun.plot_time_gap(folder, time, D1, D2, D3, D4, delta_D, xlabel, year_start=year_start, year_end=year_end, time_style=time_style)
 
 #%% sheerment over the year
 print('INFO: plot time-sheer')
-fun.plot_sheer(folder, time, D1, D2, delta_D, xlabel, year_start=year_start, year_end=year_end, time_style=time_style)
+fun.plot_sheer(folder, time, D1, D2, D3, D4, delta_D, xlabel, year_start=year_start, year_end=year_end, time_style=time_style)
 
 #%% temperature plot
 print('INFO: plot temp-gap')
-fun.plot_temperature_movement_flip(folder, D1, T1, D2, T2, delta_D, delta_T, year_start=year_start, year_end=year_end)
+fun.plot_temperature_movement(folder, T1, T2, D1, D2, D3, D4, delta_T, delta_D, year_start=year_start, year_end=year_end)
 
 print('Exitcode 0')
 
