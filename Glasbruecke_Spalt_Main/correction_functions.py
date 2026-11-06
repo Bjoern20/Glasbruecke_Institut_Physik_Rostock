@@ -2,6 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
+def delete_nans(df):
+    df_cleand = df.dropna(how='any')
+    return df_cleand
+
+
+
 def linear_fit(x, y, x_fit):
     x = np.asarray(x)
     y = np.asarray(y)
@@ -35,9 +41,9 @@ def plot_correction(df, fit1, fit2, x_ref):
         label=f'Fit T2: f(x)={fit2["slope"]:.2f}x+{fit2["intercept"]:.2f}'
     )
     plt.plot(x_ref, x_ref, linestyle='--', color='black', linewidth=1, label='ideal behavior: f(x)=x')
-    plt.xlim([10, 22])
+    # plt.xlim([10, 25])
     plt.xlabel('Old temperature [°C]')
-    plt.xlabel('Corrected temperature [°C]')
+    plt.ylabel('Corrected temperature [°C]')
     plt.title('Correction fit for FLIR/temperature measurement')
     plt.legend()
     plt.show()
